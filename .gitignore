@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/Modules/Ordering/Ordering.API/bin/Debug/net9.0
+/.vs/ECommerce/v17/TestStore/0
+/src/Modules/Ordering/Ordering.API/obj
+/src/Modules/Ordering/Ordering.Application/bin/Debug/net9.0
+/src/Modules/Ordering/Ordering.Application/obj
+/src/Modules/Ordering/Ordering.Domain/bin/Debug/net9.0
+/src/Modules/Ordering/Ordering.Domain/obj
+/src/Modules/Ordering/Ordering.Infrastructure/bin/Debug/net9.0
+/src/Modules/Ordering/Ordering.Infrastructure/obj
+/tests/Modules/Ordering/Ordering.Domain.Tests/bin/Debug/net9.0
+/tests/Modules/Ordering/Ordering.Domain.Tests/obj
