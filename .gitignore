@@ -13,3 +13,4 @@
 /src/Modules/Ordering/Ordering.Infrastructure/obj
 /tests/Modules/Ordering/Ordering.Domain.Tests/bin/Debug/net9.0
 /tests/Modules/Ordering/Ordering.Domain.Tests/obj
+/.vs/ECommerce/DesignTimeBuild
