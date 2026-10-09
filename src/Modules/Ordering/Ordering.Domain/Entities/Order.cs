@@ -1,77 +1,125 @@
-﻿using Ordering.Domain.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ordering.Domain.Enums;
+using Ordering.Domain.ValueObjects;
 
-namespace Ordering.Domain.Entities
+namespace Ordering.Domain.Entities;
+
+public class Order
 {
-    public class Order //Aggregate Root
+    private readonly List<OrderItem> _items = new();
+
+    public Guid Id { get; private set; }
+
+    public Guid CustomerId { get; private set; }
+
+    public OrderStatus Status { get; private set; }
+
+    public Address ShippingAddress { get; private set; } = null!;
+
+    public IReadOnlyCollection<OrderItem> Items =>
+        _items.AsReadOnly();
+
+    private Order()
     {
-        public Guid Id { get; private set; }
-        public Guid CustomerId { get; private set; } //DDD Concept
-        public OrderStatus Status { get; private set; }
+        // Required by EF Core later.
+    }
+    private Order(
+        Guid customerId,
+        Address shippingAddress)
+    {
+        if (customerId == Guid.Empty)
+            throw new ArgumentException(
+                "Customer is required.",
+                nameof(customerId));
 
-        private List<OrderItem> Items = new List<OrderItem>(); //Aggregate
-        public Order() 
-        { 
-            // For Entiry Framework
-        }
+        Id = Guid.NewGuid();
+        CustomerId = customerId;
+        ShippingAddress = shippingAddress;
+        Status = OrderStatus.Draft;
+    }
 
-        public void AddItem()
+    public static Order Create(
+        Guid customerId,
+        Address shippingAddress)
+    {
+        return new Order(
+            customerId,
+            shippingAddress);
+    }
+
+    public void AddItem(
+        Guid productId,
+        decimal unitPrice,
+        int quantity)
+    {
+        if (Status != OrderStatus.Draft)
+            throw new InvalidOperationException(
+                "Items can only be added to a draft order.");
+
+        var existingItem = _items
+            .FirstOrDefault(x => x.ProductId == productId);
+
+        if (existingItem != null)
         {
+            existingItem.ChangeQuantity(
+                existingItem.Quantity + quantity);
 
+            return;
         }
 
-        public void RemoveItem()
-        {
+        var item = new OrderItem(
+            productId,
+            unitPrice,
+            quantity);
 
-        }
+        _items.Add(item);
+    }
 
-        public void Cancel()
-        {
-            // Rule for Cancellation i.e. Rule:6 
-            if (Status == OrderStatus.Completed)
-                throw new Exception("Completed orders can't be cancelled.");
+    public void RemoveItem(Guid productId)
+    {
+        if (Status != OrderStatus.Draft)
+            throw new InvalidOperationException(
+                "Items can only be removed from a draft order.");
 
-            Status = OrderStatus.Cancelled;
-        }
+        var item = _items
+            .FirstOrDefault(x => x.ProductId == productId);
 
-        public void Place()
-        {
-            if (Status != OrderStatus.Draft)
-                throw new Exception("Only draft orders can be placed.");
+        if (item == null)
+            return;
 
-            if (Items.Count == 0)
-                throw new Exception("An order must contain atleast on item");
+        _items.Remove(item);
+    }
 
-            Status = OrderStatus.Placed;
-        }
+    public decimal GetTotalAmount()
+    {
+        return _items.Sum(x => x.GetTotal());
+    }
 
-        private Order(Guid customerId)
-        {
-            // Rule 1
-            if (customerId == Guid.Empty)
-            {
-                var ex = new ArgumentException("Customer is Required", "customerId");
-            }
-            Id = Guid.NewGuid();
-            CustomerId = customerId;
-            Status = OrderStatus.Draft;
-        }
+    public void Place()
+    {
+        if (Status != OrderStatus.Draft)
+            throw new InvalidOperationException(
+                "Only draft orders can be placed.");
 
+        if (!_items.Any())
+            throw new InvalidOperationException(
+                "An order must contain at least one item.");
 
+        Status = OrderStatus.Placed;
+    }
+    public void Cancel()
+    {
+        if (Status == OrderStatus.Completed)
+            throw new InvalidOperationException(
+                "Completed orders cannot be cancelled.");
 
-        // Factory
-        public static Order Create(
-            Guid customerId
-            )
-        {
+        if (Status == OrderStatus.Cancelled)
+            return;
 
-            return new Order(customerId);
-        }
-
-        // Create Order
+        Status = OrderStatus.Cancelled;
     }
 }

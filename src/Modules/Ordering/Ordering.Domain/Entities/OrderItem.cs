@@ -4,33 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ordering.Domain.Entities
+namespace Ordering.Domain.Entities;
+
+public class OrderItem
 {
-    public class OrderItem
+    public Guid Id { get; private set; }
+
+    public Guid ProductId { get; private set; }
+
+    public int Quantity { get; private set; }
+
+    public decimal UnitPrice { get; private set; }
+
+    private OrderItem()
     {
-        public Guid Id { get; private set; }
-        public Guid ProductId { get; private set; } // ProductType should not be there
-        public int Quantity { get; private set; }
+        // Required by EF Core later.
+    }
 
-        //Ubiquotous Language (i.e. Language of Business)
-        public decimal UnitPrice { get; private set; }
+    internal OrderItem(
+        Guid productId,
+        decimal unitPrice,
+        int quantity)
+    {
+        if (productId == Guid.Empty)
+            throw new ArgumentException(
+                "Product is required.",
+                nameof(productId));
 
-        public OrderItem() { }
-        public OrderItem(Guid productId, int quantity, decimal unitPrice)
-        {
-            // Validation Rule should be applied here
-            
-            // Rule 2
-            if(quantity <= 0) throw new ArgumentException("Quantity must be greater than zero.", nameof(quantity));
+        if (unitPrice < 0)
+            throw new ArgumentException(
+                "Unit price cannot be negative.",
+                nameof(unitPrice));
 
-            // Rule 7
-            if(productId == Guid.Empty)
-                throw new ArgumentException("Product is required.", nameof(productId));
+        if (quantity <= 0)
+            throw new ArgumentException(
+                "Quantity must be greater than zero.",
+                nameof(quantity));
 
-            if (unitPrice < 0)
-                throw new Exception("Unit Price cannot be negative");
+        Id = Guid.NewGuid();
+        ProductId = productId;
+        UnitPrice = unitPrice;
+        Quantity = quantity;
+    }
 
-            Id = Guid.NewGuid();
-        }
+    internal void ChangeQuantity(int quantity)
+    {
+        if (quantity <= 0)
+            throw new ArgumentException(
+                "Quantity must be greater than zero.",
+                nameof(quantity));
+
+        Quantity = quantity;
+    }
+
+    public decimal GetTotal()
+    {
+        return UnitPrice * Quantity;
     }
 }
