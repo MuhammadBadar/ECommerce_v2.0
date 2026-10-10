@@ -27,4 +27,13 @@ This section contains the presentation slides for each step of our **Domain-Driv
 ---
 
 **Happy Learning! 🚀**
+---
+
+## 🗄️ Step 4: EF Core + MySQL — Persistence
+
+**Focus:** Integrating Entity Framework Core with MySQL to persist application data and connect our Clean Architecture layers to the database.
+
+📊 [View Presentation Slides](https://docs.google.com/presentation/d/119jL23m7P-2RdlZUXeGeys-TqyUStRdvbuxVLw-u-4k/edit?usp=sharing)
+
+
 
