@@ -36,4 +36,12 @@ This section contains the presentation slides for each step of our **Domain-Driv
 📊 [View Presentation Slides](https://docs.google.com/presentation/d/119jL23m7P-2RdlZUXeGeys-TqyUStRdvbuxVLw-u-4k/edit?usp=sharing)
 
 
+---
+
+## 🔍 Step 5: CQRS Query Side — GetOrderById
+
+**Focus:** Implementing the query side of CQRS to retrieve order details by ID, using MediatR and the persistence layer in our ECommerce application.
+
+📊 [View Presentation Slides](https://docs.google.com/presentation/d/1DwzrAKcsnNqHw1QLVN0kj9bSizHFQSi6E7HNi8WV-ng/edit?usp=sharing)
+
 
