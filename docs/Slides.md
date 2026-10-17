@@ -64,10 +64,10 @@ This section contains the presentation slides for each step of our **Domain-Driv
 
 Focus: Implementing CQRS command handlers to update and cancel existing orders while enforcing domain business rules and maintaining order consistency in our ECommerce application.
 
-📊 Open Step 7 Presentation Slides
+📊 [View Presentation Slides](https://docs.google.com/presentation/d/1hXOPXU66vW8u_44QGPzNWtCFPc0KBsU2ZMgEueEj67k/edit?usp=sharing)
 
 ## ⚡ Step 8: Domain Events
 
 Focus: Understanding and implementing Domain Events in Domain-Driven Design (DDD) to capture important business occurrences, decouple domain logic from side effects, and enable communication between different parts of our ECommerce application.
 
-📊 Open Step 8 Presentation Slides
+📊 [View Presentation Slides](https://docs.google.com/presentation/d/1xCmFNnlvLmQYc9BQboNvWGPFix0gKacuaNXb_W59iJ4/edit?usp=sharing)
