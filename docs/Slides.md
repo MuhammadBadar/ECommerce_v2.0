@@ -60,4 +60,8 @@ This section contains the presentation slides for each step of our **Domain-Driv
 
 📊 [View Presentation Slides](https://docs.google.com/presentation/d/1NO3x6CDQj9KqOt7FqUCUaBua2EKNRx46dcSLBpqMh9s/edit?usp=sharing)
 
+🔄 Step 7: Update & Cancel Order Commands
 
+Focus: Implementing CQRS command handlers to update and cancel existing orders, while enforcing domain business rules and maintaining order consistency in our ECommerce application.
+
+📊 View Presentation Slides
