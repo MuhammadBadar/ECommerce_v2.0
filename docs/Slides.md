@@ -44,4 +44,20 @@ This section contains the presentation slides for each step of our **Domain-Driv
 
 📊 [View Presentation Slides](https://docs.google.com/presentation/d/1DwzrAKcsnNqHw1QLVN0kj9bSizHFQSi6E7HNi8WV-ng/edit?usp=sharing)
 
+---
+
+## 💰 Step 5.5: Introduction to the Money Value Object
+
+**Focus:** Understanding the Money Value Object in Domain-Driven Design (DDD) to represent monetary values consistently, encapsulate business rules, and avoid common issues with currency and decimal calculations.
+
+📊 [View Presentation Slides](https://docs.google.com/presentation/d/1NYs5E0OBGPnDaZE5YxPHzzyM3jMRJszOOVLyaouwL-k/edit?usp=sharing)
+
+---
+
+## 📋 Step 6: List Orders with Pagination, Filtering & Sorting
+
+**Focus:** Implementing an order listing query with pagination, filtering, and sorting to retrieve order data efficiently and provide flexible querying capabilities in our ECommerce application.
+
+📊 [View Presentation Slides](https://docs.google.com/presentation/d/1NO3x6CDQj9KqOt7FqUCUaBua2EKNRx46dcSLBpqMh9s/edit?usp=sharing)
+
 
