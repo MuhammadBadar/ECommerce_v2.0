@@ -1,0 +1,29 @@
+
+name: My First Pipeline
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hello:
+    name: Run My First Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display welcome message
+        run: echo "Hello from GitHub Actions!"
+
+      - name: Display repository information
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch or ref: $GITHUB_REF"
+          echo "Commit: $GITHUB_SHA"
+
+      - name: Display runner information
+        run: |
+          echo "Operating system: $RUNNER_OS"
+          echo "Workflow completed its demonstration steps."
